@@ -1,5 +1,5 @@
 import 'package:aiden_admin/utils/variable.dart';
-import 'package:aiden_admin/view/login/login_screen.dart';
+import 'package:aiden_admin/view/sign-up/login/login_screen.dart';
 import 'package:aiden_admin/view/sign-up/reigster_screen.dart';
 import 'package:aiden_admin/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -19,23 +19,26 @@ class _LandingPageState extends State<LandingPage> {
     hight = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
         body: Container(
       margin: const EdgeInsets.all(20),
       child: Row(
         children: [
-          SizedBox(
-            height: hight,
-            width: width! * 0.45,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                brandName(100.0, Colors.black, FontWeight.w400),
-                adminpaneltext(20.0, Colors.grey.shade700, FontWeight.w500)
-              ],
+          FittedBox(
+            child: SizedBox(
+              height: hight,
+              width: width! * 0.45,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  brandName(100.0, Colors.black, FontWeight.w400),
+                  adminpaneltext(20.0, Colors.grey.shade700, FontWeight.w500)
+                ],
+              ),
             ),
           ),
            Expanded(
-            child:showLoginPage? SignupPage(togglePage: togglePage): Loginscreen(togglePage: togglePage)
+            child:showLoginPage?  Loginscreen(togglePage: togglePage):SignupPage(togglePage: togglePage)
             
           )
         ],

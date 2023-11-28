@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 Widget brandName(size, colour, weight) {
-  return Text("AIDEN",
-      style: GoogleFonts.josefinSans(
-          fontSize: size, fontWeight: weight, color: colour));
+  return FittedBox(
+    fit: BoxFit.scaleDown,
+    child: Text("AIDEN",
+        style: GoogleFonts.josefinSans(
+            fontSize: size, fontWeight: weight, color: colour)),
+  );
 }
 Widget adminpaneltext(size, colour, weight){
   return 

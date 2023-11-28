@@ -42,14 +42,20 @@ class _SignupPageState extends State<SignupPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text(
-              "Sign Up",
-              style: GoogleFonts.poppins(
-                  fontSize: 30, fontWeight: FontWeight.w600),
-            ),
-            Text("Create an new account",
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                "Sign Up",
                 style: GoogleFonts.poppins(
-                    fontSize: 20, fontWeight: FontWeight.w400)),
+                    fontSize: 30, fontWeight: FontWeight.w600),
+              ),
+            ),
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text("Create an new account",
+                  style: GoogleFonts.poppins(
+                      fontSize: 20, fontWeight: FontWeight.w400)),
+            ),
             SizedBox(
               width: width! * .87,
               height: hight! * .346,
@@ -138,16 +144,23 @@ class _SignupPageState extends State<SignupPage> {
               ),
             ),
             ListTile(
-                leading: Checkbox(
-                    checkColor: const Color.fromARGB(255, 255, 255, 255),
-                    activeColor: lightGreen,
-                    value: isCheckBoxEnabled,
-                    onChanged: (_) {
-                      setState(() {
-                        isCheckBoxEnabled = _!;
-                      });
-                    }),
-                title: termsAndCondition),
+                leading: FittedBox(
+                  fit: BoxFit.cover,
+                  child: Checkbox(
+                      checkColor: const Color.fromARGB(255, 255, 255, 255),
+                      activeColor: black,
+                      value: isCheckBoxEnabled,
+                      onChanged: (_) {
+                        setState(() {
+                          isCheckBoxEnabled = _!;
+                        });
+                      }),
+                ),
+                title: FittedBox(
+                  alignment: Alignment.centerLeft,
+                  fit: BoxFit.scaleDown,
+                
+                  child: termsAndCondition)),
             customeButton(
                 context: context,
                 text: "Sign up",
@@ -172,31 +185,34 @@ class _SignupPageState extends State<SignupPage> {
                   });
                 },
                 bgColor: const MaterialStatePropertyAll(black)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("Already have an account ?",
-                    style: TextStyle(
-                      color: Color.fromRGBO(145, 145, 159, 1),
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    )),
-                TextButton(
-                  onPressed: () {
-                    print("sign");
-                    setState(() {
-                      widget.togglePage();
-                    });
-                  },
-                  child: const Text("Login",
+            FittedBox(
+
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Already have an account ?",
                       style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        color: Color.fromRGBO(127, 61, 255, 1),
+                        color: Color.fromRGBO(145, 145, 159, 1),
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       )),
-                ),
-              ],
+                  TextButton(
+                    onPressed: () {
+                      print("sign");
+                      setState(() {
+                        widget.togglePage();
+                      });
+                    },
+                    child: const Text("Login",
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          color: Color.fromRGBO(127, 61, 255, 1),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        )),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

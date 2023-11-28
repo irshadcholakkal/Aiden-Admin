@@ -25,7 +25,6 @@ class _LoginscreenState extends State<Loginscreen> {
 
   @override
   Widget build(BuildContext context) {
-    bool page =true;
     return 
       
          Container(
@@ -38,14 +37,18 @@ class _LoginscreenState extends State<Loginscreen> {
               const SizedBox(
                 height: 60,
               ),
-              Text(
-                            "Welcome !",
-                            style: GoogleFonts.poppins(
-                                fontSize: 30, fontWeight: FontWeight.w600),
-                          ),
-                          Text("Please login to continue our app",
+              FittedBox(
+                child: Text(
+                              "Welcome !",
                               style: GoogleFonts.poppins(
-                                  fontSize: 20, fontWeight: FontWeight.w400)),
+                                  fontSize: 30, fontWeight: FontWeight.w600),
+                            ),
+              ),
+                          FittedBox(
+                            child: Text("Please login to continue our app",
+                                style: GoogleFonts.poppins(
+                                    fontSize: 20, fontWeight: FontWeight.w400)),
+                          ),
               Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -155,88 +158,105 @@ class _LoginscreenState extends State<Loginscreen> {
                     }
                   },
                   bgColor: const MaterialStatePropertyAll(Colors.black)),
-              const Padding(
+               const Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Text(
-                  "or",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                child:  FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    "or",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                  ),
                 ),
               ),
-              Container(
-                height: 60,
-                width: 360,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40),
-                    border: Border.all(
-                        width: 1, color: const Color.fromRGBO(138, 138, 141, 1))),
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 60, right: 20),
-                      child: Image.asset(
-                        'assets/images/googlelogo.png',
-                      ),
+              Flexible(
+
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Container(
+                    height:60,
+                    width: 320,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(40),
+                        border: Border.all(
+                            width: 1, color: const Color.fromRGBO(138, 138, 141, 1))),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Image.asset(
+                          'assets/images/googlelogo.png',
+                        ),
+                        Flexible(
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              'Sign Up with Google',
+                              style: GoogleFonts.rubik(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    Text(
-                      'Sign Up with Google',
-                      style: GoogleFonts.rubik(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black),
-                    ),
-                  ],
+                  ),
                 ),
               ),
               const SizedBox(
                 height: 10,
               ),
-              SizedBox(
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text("Don’t have an account yet?",
-                            style: TextStyle(
-                              color: Color.fromRGBO(145, 145, 159, 1),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            )),
-                        TextButton(
-                          onPressed: () {
-                           
-                           setState(() {
-                              widget.togglePage();
-                           });
-                           print("login");
-                          },
-                          child: const Text(" Sign Up",
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: SizedBox(
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("Don’t have an account yet?",
                               style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                color: Color.fromRGBO(127, 61, 255, 1),
+                                color: Color.fromRGBO(145, 145, 159, 1),
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
                               )),
-                        ),
-                      ],
-                    ),
-                    TextButton(
-                      child: const Text(
-                        "Forgot Password?",
-                        style: TextStyle(
-                          color: Color.fromRGBO(127, 61, 255, 1),
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
+                          FittedBox(
+                            child: TextButton(
+                              onPressed: () {
+                               
+                               setState(() {
+                                  widget.togglePage();
+                               });
+                               print("login");
+                              },
+                              child: const Text(" Sign Up",
+                                  style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    color: Color.fromRGBO(127, 61, 255, 1),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  )),
+                            ),
+                          ),
+                        ],
                       ),
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => Forgotpage()));
-                      },
-                    ),
-                  ],
+                      TextButton(
+                        child: const Text(
+                          "Forgot Password?",
+                          style: TextStyle(
+                            color: Color.fromRGBO(127, 61, 255, 1),
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        onPressed: () {
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => Forgotpage()));
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ]),

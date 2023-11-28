@@ -1,4 +1,4 @@
-import 'package:aiden_admin/view/landing_page.dart';
+import 'package:aiden_admin/view/sign-up/landing_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
