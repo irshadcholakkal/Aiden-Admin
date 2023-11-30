@@ -28,10 +28,15 @@ Text termsAndCondition = Text(
   ),
 );
 
-Text ProductPageProductName =  Text("Alex Arigato",style: GoogleFonts.rubik(fontSize: 25,fontWeight: FontWeight.w500),);
-Text ProductPageProutSubName=  Text("Clean 90 triale",style: GoogleFonts.rubik(fontSize: 15,fontWeight: FontWeight.w200),);
+Text productPageProductName =  Text("Alex Arigato",style: GoogleFonts.rubik(fontSize: 25,fontWeight: FontWeight.w500),);
+Text productPageProutSubName=  Text("Clean 90 triale",style: GoogleFonts.rubik(fontSize: 15,fontWeight: FontWeight.w200),);
 Text numberOfReviews = Text("(${"320"}Review)",style:  GoogleFonts.rubik(fontSize: 10,fontWeight: FontWeight.w200),);
 
-Text Description = Text("The Clean 90 Triple sneaker is defined by contrasting panels at the heel tab, tongue and toe. This pair has been handmade in Portugal from LWG-certified leather and set on rubber cup-soles that are stitched and glued to the uppers for durability. Discreet gold logos accent the sides.",style:  GoogleFonts.rubik(fontSize: 10.5,fontWeight: FontWeight.w200));
-Text Price= Text("₹${230}",style: GoogleFonts.rubik(fontSize: 25,fontWeight: FontWeight.w500),);
+Text description = Text("The Clean 90 Triple sneaker is defined by contrasting panels at the heel tab, tongue and toe. This pair has been handmade in Portugal from LWG-certified leather and set on rubber cup-soles that are stitched and glued to the uppers for durability. Discreet gold logos accent the sides.",style:  GoogleFonts.rubik(fontSize: 10.5,fontWeight: FontWeight.w200));
+Text price= Text("₹${230}",style: GoogleFonts.rubik(fontSize: 25,fontWeight: FontWeight.w500),);
 Text addtocart=Text("Add to cart",style: GoogleFonts.rubik(fontSize: 20,fontWeight: FontWeight.w500,color: white),);
+
+
+Text dashBoardText =Text(" DASHBOARD",style: GoogleFonts.rubik(fontSize: 15,fontWeight: FontWeight.w500),);
+Text allProductsText =Text(" ALL PRODUCTS",style: GoogleFonts.rubik(fontSize: 15,fontWeight: FontWeight.w500),);
+Text addProductButton =Text("Add Product",style: GoogleFonts.rubik(fontSize: 12,fontWeight: FontWeight.w500,color: white),);

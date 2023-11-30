@@ -1,4 +1,6 @@
-import 'package:aiden_admin/view/sign-up/landing_page.dart';
+
+import 'package:aiden_admin/view/dashbord/web_layout.dart';
+import 'package:aiden_admin/view/dashbord/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +14,11 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:LandingPage()
+      home:
+      
+      //DashBoard()
+      //LandingPage()
+      WebLayout()
     );
   }
 }

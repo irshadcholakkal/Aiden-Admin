@@ -2,6 +2,7 @@ import 'package:aiden_admin/utils/colors.dart';
 import 'package:aiden_admin/utils/images.dart';
 import 'package:aiden_admin/utils/texts.dart';
 import 'package:aiden_admin/utils/variable.dart';
+import 'package:aiden_admin/view/dashbord/home.dart';
 import 'package:aiden_admin/widgets/custome_button.dart';
 import 'package:aiden_admin/view-model/custom_textfield.dart';
 import 'package:flutter/material.dart';
@@ -179,7 +180,7 @@ class _SignupPageState extends State<SignupPage> {
                         // Navigator.pushReplacement(
                         //     context,
                         //     MaterialPageRoute(
-                        //         builder: (context) =>  HomePage()));
+                        //         builder: (context) =>  Home()));
                       }
                     }
                   });

@@ -1,12 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 double?hight;
 double?width;
 bool isPasswordHide = true;
+// int  selectedHomePageIndex = 0;
 
-double calculateResponsiveFontSize(double screenWidth) {
-  // You can adjust these values based on your design and preferences
-  const double baseFontSize = 18.0;
-  const double maxWidth = 500.0;
-
-  // Calculate a responsive font size
-  return baseFontSize * screenWidth / maxWidth;
-}
