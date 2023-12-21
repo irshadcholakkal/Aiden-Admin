@@ -9,6 +9,7 @@ Widget customeTextField(
     String? Function(String?)? validator,
     void Function(String)? onSubmitted}) {
   return TextFormField(
+    
     validator: validator,
     onFieldSubmitted: onSubmitted,
     obscureText: obsecure ?? false,

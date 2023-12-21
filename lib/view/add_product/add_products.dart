@@ -1,24 +1,215 @@
-import 'package:aiden_admin/view/dashbord/web_layout.dart';
+import 'package:aiden_admin/model/image-picker.dart';
+import 'package:aiden_admin/model/image_store.dart';
+import 'package:aiden_admin/model/services/product/product_data.dart';
+import 'package:aiden_admin/utils/colors.dart';
+import 'package:aiden_admin/utils/variable.dart';
+import 'package:aiden_admin/view-model/custom_textfield.dart';
+import 'package:aiden_admin/widgets/custome_button.dart';
+import 'package:aiden_admin/widgets/widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class AddProductPage extends StatefulWidget {
-  const AddProductPage({super.key});
+import '../../model/getx_controller.dart';
 
-  @override
-  State<AddProductPage> createState() => _AddProductPageState();
-}
-
-class _AddProductPageState extends State<AddProductPage> {
+class AddProductPage extends StatelessWidget {
+  AddProductPage({super.key});
+  final Control controller = Get.put(Control());
   @override
   Widget build(BuildContext context) {
-    return 
-       
-          Container(
-          height: 100,
-          width: 100,
-          color: Colors.yellow,
-               );
-       
-    
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // InkWell(
+            //   onTap: (){
+            //     pickImage();
+            //   },
+            //   child: Obx(()=>
+            //      Container(
+            //       width: width! * 0.3,
+            //       height: hight! * 0.3,
+            //       color: black,
+            //       child:Column(
+            //         children: [
+            //            if (controller.imageBytes.value != null)
+            //       Image.memory(
+            //         controller.imageBytes.value!,
+            //         width: width! * 0.3,
+            //         height:hight! * 0.3 ,
+            //         // fit: BoxFit.fill,
+            //       ),
+
+            //         ],
+            //       )
+
+            //     ),
+            //   ),
+            // ),
+            SizedBox(
+              width: width! * 0.01,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                //     InkWell(
+                //   onTap: (){
+                //     pickImage();
+                //   },
+                //   child: Obx(()=>
+                //      Container(
+                //       width: width! * 0.1,
+                //       height: hight! * 0.1,
+                //       color: black,
+                //       child:Column(
+                //         children: [
+                //            if (controller.imageBytes.value != null)
+                //       Image.memory(
+                //         controller.imageBytes.value!,
+                //         width: width! * 0.1,
+                //         height:hight! * 0.1 ,
+                //         // fit: BoxFit.fill,
+                //       ),
+                //         ],
+                //       )
+
+                //     ),
+                //   ),
+                // ),
+                // InkWell(
+                //   onTap: (){
+                //     pickImage();
+                //   },
+                //   child: Obx(()=>
+                //      Container(
+                //       width: width! * 0.1,
+                //       height: hight! * 0.1,
+                //       color: black,
+                //       child:Column(
+                //         children: [
+                //            if (controller.imageBytes.value != null)
+                //       Image.memory(
+                //         controller.imageBytes.value!,
+                //         width: width! * 0.1,
+                //         height:hight! * 0.1 ,
+                //         // fit: BoxFit.fill,
+                //       ),
+                //         ],
+                //       )
+
+                //     ),
+                //   ),
+                // ),
+
+                InkWell(
+                  onTap: () {
+                    // pickImage();
+                    fetchImage();
+                  },
+                  child: Obx(
+                    () => Container(
+                        width: width! * 0.3,
+                        height: hight! * 0.3,
+                        color: black,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            if (controller.imageBytes.value != null)
+                              Image.memory(
+                                controller.imageBytes.value!,
+                                width: width! * 0.3,
+                                height: hight! * 0.3,
+                                // fit: BoxFit.fill,
+                              ),
+                              if (controller.imageBytes.value == null)
+                              Center(child: Text("Add Image",style: GoogleFonts.rubik(fontSize: 20, fontWeight: FontWeight.w600,color: white)))
+                          ],
+                        )),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+        SizedBox(
+            width: width! * 0.55,
+            child: customeTextField(
+                labelText: "Product Name", controller: productname)),
+        SizedBox(
+            width: width! * 0.55,
+            child: customeTextField(
+                labelText: "Product Description",
+                controller: productdescription)),
+        SizedBox(
+            width: width! * 0.55,
+            child: customeTextField(labelText: "Product Category")),
+        SizedBox(
+            width: width! * 0.55,
+            child: customeTextField(
+                labelText: "Product Price", controller: productprice )),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            SizedBox(
+                width: width! * 0.2,
+                child: customeButton(
+                    text: "cancel",
+                    onpressed: () {
+                      controller.addProductButtonBool.value =
+                          !controller.addProductButtonBool.value;
+                    },
+                    bgColor: const MaterialStatePropertyAll(Colors.black))),
+            Obx(
+              ()=> SizedBox(
+                  width: width!* 0.2,
+                  height: hight!* .06,
+                  child:
+                  
+                   ElevatedButton(
+                    onPressed: ()async {
+
+                      
+
+
+                    if (controller.alreadyExisted.value == false)
+                      controller.addProductButtonBool.value =
+                          !controller.addProductButtonBool.value;
+                           controller.saveButton.value =
+                          !controller.saveButton.value;
+                            
+                    await saveToStore();
+                    await storeProductrData().then((value) =>  controller.saveButton.value =
+                          !controller.saveButton.value);
+                    productdescription.clear();
+                    productname.clear();
+                    productprice.clear();
+                    controller.imageBytes.value=null;
+
+                     controller.productsList.refresh();
+                    print("==============sucess====================");
+                    SnackBarPage();
+                  },
+                    style: ButtonStyle(
+                      backgroundColor:const MaterialStatePropertyAll(Colors.black) ,
+                      shape: MaterialStatePropertyAll(
+                          RoundedRectangleBorder(borderRadius: BorderRadius.circular(40))),
+                    ),
+                    child: controller.saveButton.value?
+                    customeText(text:"Save" , textcolor: white):CircularProgressIndicator(
+                      color: white,
+                      strokeCap:StrokeCap.round ,
+                                  
+                    )
+                  ) 
+                ),
+            ),
+          ],
+        ),
+      ],
+    );
   }
 }

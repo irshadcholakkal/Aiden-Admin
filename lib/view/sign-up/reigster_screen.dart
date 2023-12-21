@@ -163,7 +163,7 @@ class _SignupPageState extends State<SignupPage> {
                 
                   child: termsAndCondition)),
             customeButton(
-                context: context,
+                
                 text: "Sign up",
                 onpressed: () {
                   setState(() {
