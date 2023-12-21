@@ -1,10 +1,15 @@
 
+import 'package:aiden_admin/model/getx_controller.dart';
+import 'package:aiden_admin/model/services/authentication_services.dart';
+import 'package:aiden_admin/model/user/user_data.dart';
 import 'package:aiden_admin/utils/colors.dart';
 import 'package:aiden_admin/utils/images.dart';
 import 'package:aiden_admin/utils/variable.dart';
 import 'package:aiden_admin/view/dashbord/web_layout.dart';
+
 import 'package:aiden_admin/widgets/custome_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Loginscreen extends StatefulWidget {
@@ -21,6 +26,7 @@ class _LoginscreenState extends State<Loginscreen> {
   TextEditingController password = TextEditingController();
 
   
+  final Control controller = Get.put(Control());
 
   final _formKey = GlobalKey<FormState>();
 
@@ -148,15 +154,16 @@ class _LoginscreenState extends State<Loginscreen> {
                 height: 60,
               ),
               customeButton(
-                  context: context,
+                  
                   text: 'Login',
                   onpressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      // Navigator.pushReplacement(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //           builder: (context) =>  DashBoard()));
-                    }
+                    Get.offAll(WebLayout());
+                    // if (_formKey.currentState!.validate()) {
+                    //   // Navigator.pushReplacement(
+                    //   //       context,
+                    //   //       MaterialPageRoute(
+                    //   //           builder: (context) =>  DashBoard()));
+                    // }
                   },
                   bgColor: const MaterialStatePropertyAll(Colors.black)),
                const Padding(
@@ -173,32 +180,38 @@ class _LoginscreenState extends State<Loginscreen> {
 
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
-                  child: Container(
-                    height:60,
-                    width: 320,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(40),
-                        border: Border.all(
-                            width: 1, color: const Color.fromRGBO(138, 138, 141, 1))),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Image.asset(
-                          'assets/images/googlelogo.png',
-                        ),
-                        Flexible(
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: Text(
-                              'Sign Up with Google',
-                              style: GoogleFonts.rubik(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black),
+                  child: InkWell(
+                    onTap: ()async{
+                      await Authentication().signInWithGoogle();
+                      storeUserData();
+                    },
+                    child: Container(
+                      height:60,
+                      width: 320,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(40),
+                          border: Border.all(
+                              width: 1, color: const Color.fromRGBO(138, 138, 141, 1))),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Image.asset(
+                            'assets/images/googlelogo.png',
+                          ),
+                          Flexible(
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                'Sign Up with Google',
+                                style: GoogleFonts.rubik(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),

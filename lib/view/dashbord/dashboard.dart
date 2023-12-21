@@ -4,14 +4,9 @@ import 'package:aiden_admin/utils/variable.dart';
 import 'package:aiden_admin/view-model/dashbord_items.dart';
 import 'package:flutter/material.dart';
 
-class DashBoard extends StatefulWidget {
+class DashBoard extends StatelessWidget {
   const DashBoard({super.key});
 
-  @override
-  State<DashBoard> createState() => _DashBoardState();
-}
-
-class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
      hight = MediaQuery.of(context).size.height;

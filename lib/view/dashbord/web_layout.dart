@@ -6,23 +6,21 @@ import 'package:aiden_admin/view/dashbord/all_products.dart';
 import 'package:aiden_admin/view/dashbord/dashboard.dart';
 import 'package:aiden_admin/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class WebLayout extends StatefulWidget {
- // final Widget body; 
- 
- const WebLayout({super.key});
+import '../../model/getx_controller.dart';
 
-  @override
-  State<WebLayout> createState() => _WebLayoutState();
-}
+class WebLayout extends StatelessWidget {
+  // final Widget body;
 
-class _WebLayoutState extends State<WebLayout> {
-  int selectedHomePageIndex=0;
+  WebLayout({super.key});
+
+  final Control controller = Get.put(Control());
+
   @override
   Widget build(BuildContext context) {
     hight = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
-
     return Scaffold(
       appBar: AppBar(
         title: brandName(35.0, black, FontWeight.w600),
@@ -30,37 +28,44 @@ class _WebLayoutState extends State<WebLayout> {
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.search_rounded)),
           IconButton(onPressed: () {}, icon: Icon(Icons.notifications_rounded)),
+          Obx(() {
+            if (controller.userData.value != null) {
+              return CircleAvatar(
+                backgroundImage: NetworkImage(userData.photoURL),
+              );
+            } else {
+              return CircularProgressIndicator();
+            }
+          }),
         ],
       ),
-      body: SizedBox(
-        child: Row(
-          children: [
-            SizedBox(
-              width: width! * 0.13,
-              height: hight,
-              child: Column(
-                children: [
-                  SizedBox(
-                    width: width,
-                    height: hight! * 0.3,
-                    child: ListView.builder(
-                        itemCount: dashBoardItem.length,
-                        itemBuilder: (context, index) {
-                          
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: AspectRatio(
-                              aspectRatio: 3,
-                              child: InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    selectedHomePageIndex = index;
-                                  });
-                                },
-                                child: Container(
+      body: Row(
+        children: [
+          Expanded(
+            flex: 1,
+            child: Column(
+              children: [
+                SizedBox(
+                  width: width,
+                  height: hight! * 0.3,
+                  child: ListView.builder(
+                      itemCount: dashBoardItem.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: AspectRatio(
+                            aspectRatio: 3,
+                            child: InkWell(
+                              onTap: () {
+                                controller.selectedHomePageIndex.value = index;
+                              },
+                              child: Obx(
+                                () => Container(
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
-                                        color: selectedHomePageIndex == index
+                                        color: controller.selectedHomePageIndex
+                                                    .value ==
+                                                index
                                             ? Colors.blueGrey.withOpacity(0.7)
                                             : Colors.grey.shade200),
                                     width: width,
@@ -76,47 +81,43 @@ class _WebLayoutState extends State<WebLayout> {
                                     )),
                               ),
                             ),
-                          );
-                        }),
-                  )
-                ],
-              ),
+                          ),
+                        );
+                      }),
+                )
+              ],
             ),
-            Expanded(
-                child: 
-                 Container(
-                    color: grey.withOpacity(0.2), child:
-                     selectedHomePageIndex==3?AddProductPage():buildSelectedPage(selectedHomePageIndex: selectedHomePageIndex)
+          ),
+          Expanded(
+              flex: 6,
+              child: Container(
+                  color: grey.withOpacity(0.2),
+                  child: Obx(() => buildSelectedPage(
+                      selectedHomePageIndex:
+                          controller.selectedHomePageIndex.value))
 
-                    // AllProducts()
-                    // DashBoard(),
-                    )
-                    )
-          ],
-        ),
+                  // AllProducts()
+                  // DashBoard(),
+                  ))
+        ],
       ),
     );
   }
 }
 
-Widget buildSelectedPage({int selectedHomePageIndex=0}) {
-  
-  
+Widget buildSelectedPage({int selectedHomePageIndex = 0}) {
   switch (selectedHomePageIndex) {
     case 0:
       return const DashBoard();
     case 1:
-      return const AllProducts();
+      return AllProducts();
     case 2:
-      return const AllProducts();
-      case 3:
-      return const AddProductPage();
-      
+      return AddProductPage();
+    case 3:
+      return AddProductPage();
 
     // Add more cases for other pages if needed
     default:
       return Container(); // Default case, you can replace it with a default page or an empty container
   }
 }
-
-
