@@ -116,8 +116,7 @@ Widget buildSelectedPage({int selectedHomePageIndex = 0}) {
     case 3:
       return AddProductPage();
 
-    // Add more cases for other pages if needed
     default:
-      return Container(); // Default case, you can replace it with a default page or an empty container
+      return Container(); 
   }
 }

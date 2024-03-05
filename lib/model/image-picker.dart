@@ -86,7 +86,7 @@ import 'dart:html';
 import 'dart:typed_data';
 import 'package:aiden_admin/model/getx_controller.dart';
 import 'package:aiden_admin/utils/variable.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+//import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 
 // Assuming you have a GetX controller
@@ -125,20 +125,20 @@ fetchImage() {
 }
 Blob ?blob;
 saveToStore() async {
-   FirebaseStorage fs = FirebaseStorage.instance;
+  // FirebaseStorage fs = FirebaseStorage.instance;
 
-  try {
-    // Specify the path and upload the blob to Firebase Storage
-    var snapshot = await fs.ref().child(productname.text).putBlob(blob);
+  // try {
+  //   // Specify the path and upload the blob to Firebase Storage
+  //   var snapshot = await fs.ref().child(productname.text).putBlob(blob);
 
-    // Get the download URL of the uploaded file
-    String downloadUrl = await snapshot.ref.getDownloadURL();
+  //   // Get the download URL of the uploaded file
+  //   String downloadUrl = await snapshot.ref.getDownloadURL();
        
-    // Update the UI or state with the download URL
-    controller.imgUrl.value = downloadUrl;
-    print("=====${controller.imgUrl.value}====");
-    print(downloadUrl);
-  } catch (error) {
-    print('Error uploading image to Firebase Storage: $error');
-  }
+  //   // Update the UI or state with the download URL
+  //   controller.imgUrl.value = downloadUrl;
+  //   print("=====${controller.imgUrl.value}====");
+  //   print(downloadUrl);
+  // } catch (error) {
+  //   print('Error uploading image to Firebase Storage: $error');
+  // }
 }

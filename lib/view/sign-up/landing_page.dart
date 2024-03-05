@@ -37,8 +37,10 @@ class _LandingPageState extends State<LandingPage> {
               ),
             ),
           ),
-           Expanded(
-            child:showLoginPage?  Loginscreen(togglePage: togglePage):SignupPage(togglePage: togglePage)
+           const Expanded(
+            
+            child:Loginscreen()
+            //showLoginPage?  Loginscreen(togglePage: togglePage):SignupPage(togglePage: togglePage)
             
           )
         ],
@@ -46,11 +48,11 @@ class _LandingPageState extends State<LandingPage> {
     ));
   }
 
-   void togglePage() {
-    setState(() {
-      showLoginPage = !showLoginPage;
-    });
-  }
+  //  void togglePage() {
+  //   setState(() {
+  //     showLoginPage = !showLoginPage;
+  //   });
+  // }
 
 
 

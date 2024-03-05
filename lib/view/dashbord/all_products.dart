@@ -1,4 +1,5 @@
 import 'package:aiden_admin/model/getx_controller.dart';
+import 'package:aiden_admin/model/services/categories/categories.dart';
 import 'package:aiden_admin/model/services/product/product_details_model_class.dart';
 import 'package:aiden_admin/utils/colors.dart';
 import 'package:aiden_admin/utils/texts.dart';
@@ -12,9 +13,23 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AllProducts extends StatelessWidget {
+import '../../model/services/product/product_data.dart';
+
+class AllProducts extends StatefulWidget {
   AllProducts({super.key});
+
+  @override
+  State<AllProducts> createState() => _AllProductsState();
+}
+
+class _AllProductsState extends State<AllProducts> {
   final Control controller = Get.put(Control());
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getProductData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +49,9 @@ class AllProducts extends StatelessWidget {
                         allProductsText,
                         InkWell(
                           onTap: () {
+                            
+
+                            getAllCategories();
                              controller.addProductButtonBool.value=!controller.addProductButtonBool.value;
                           },
                           child: Container(
@@ -79,14 +97,15 @@ class AllProducts extends StatelessWidget {
                                   crossAxisCount: 4),
                                   itemCount: controller.productsList.length,
                           itemBuilder: (context, index) {
-                            print("@@@@@@@@@@@@@@@@@@@${controller.productsList[index].imageUrl}@@@@@@@@@@@@@@2");
+                           // print("@@@@@@@@@@@@@@@@@@@${controller.productsList[index].imageUrl}@@@@@@@@@@@@@@2");
                               return
                              Container(
                               margin: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: white,
-                              ),
+                              color: white,
+                              // decoration: BoxDecoration(
+                              //   borderRadius: BorderRadius.circular(10),
+                              //   color: white,
+                              // ),
                               width: width! * 0.02,
                               height: hight! * 0.02,
                               child: Column(
@@ -94,16 +113,16 @@ class AllProducts extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                 
-                                ClipRRect(
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(10)),
-                                        child: Image.network(
-                                          "${controller.productsList[index].imageUrl}",
-                                          fit: BoxFit.fill,
-                                          height: hight!*0.25,
-                                          width: width,
-                                        ),
-                                      ),
+                                // ClipRRect(
+                                //         borderRadius: const BorderRadius.all(
+                                //             Radius.circular(10)),
+                                //         child: Image.network(
+                                //        ///   "${controller.productsList[index].imageUrl}",
+                                //           fit: BoxFit.fill,
+                                //           height: hight!*0.25,
+                                //           width: width,
+                                //         ),
+                                //       ),
                     
                                 Center(child: customeText(text: controller.productsList[index].productName,textcolor: black)),
                                 Text("₹: ${controller.productsList[index].productPrice}",style: GoogleFonts.rubik(fontSize: 20, fontWeight: FontWeight.w600))

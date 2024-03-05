@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 Widget brandName(size, colour, weight) {
   return FittedBox(
     fit: BoxFit.scaleDown,
-    child: Text("AIDEN",
+    child: Text("EEZY",
         style: GoogleFonts.josefinSans(
             fontSize: size, fontWeight: weight, color: colour)),
   );
